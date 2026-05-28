@@ -5,7 +5,7 @@ Full Machine Learning pipeline to predict the price per unit area
 UCI Real Estate Valuation dataset.
 
 ## Files
-- [Notebook](/.ipynb)
+- [Notebook]((https://nbviewer.org/github/BabylonFushi/Sindian-Dataset/blob/main/.ipynb))
 - [Presentation](https://canva.link/jdzyqvy05zdhny8)
 
 ## Project Overview
