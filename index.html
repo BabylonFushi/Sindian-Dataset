@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Real Estate Price Prediction — Sindian</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      background: #111 url('bg.jpg') center center / cover no-repeat fixed;
+      color: #1a1a18;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 10, 0.62);
+      z-index: 0;
+    }
+    .container {
+      max-width: 760px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      padding: 4rem 2rem 3rem;
+    }
+
+    .hero {
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      margin-bottom: 1.5rem;
+    }
+    .hero-meta { font-size: 12px; color: rgba(255,255,255,0.45); margin-bottom: 6px; }
+    .hero h1 { font-size: 26px; font-weight: 500; margin-bottom: 8px; color: #fff; }
+    .hero p { font-size: 15px; color: rgba(255,255,255,0.6); margin-bottom: 12px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-size: 12px; padding: 3px 10px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.75);
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+      margin-bottom: 1.5rem;
+    }
+    .metric {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+    }
+    .metric-label { font-size: 12px; color: rgba(255,255,255,0.45); margin-bottom: 4px; }
+    .metric-value { font-size: 22px; font-weight: 500; color: #fff; }
+    .metric-sub { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+
+    .section-title {
+      font-size: 11px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.07em;
+      color: rgba(255,255,255,0.4); margin: 1.5rem 0 0.75rem;
+    }
+
+    .pipeline {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-bottom: 1.5rem;
+    }
+    .step {
+      font-size: 12px; color: rgba(255,255,255,0.65);
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px; padding: 4px 10px;
+    }
+
+    .file-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px;
+      margin-bottom: 1.5rem;
+    }
+    .file-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, background 0.15s;
+      display: block;
+    }
+    .file-card:hover {
+      background: rgba(255,255,255,0.13);
+      border-color: rgba(255,255,255,0.3);
+    }
+    .file-title { font-size: 13px; font-weight: 500; margin-bottom: 3px; color: #fff; }
+    .file-desc { font-size: 12px; color: rgba(255,255,255,0.45); }
+
+    .results {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    .results table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .results th {
+      text-align: left; padding: 8px 12px;
+      font-weight: 500; color: rgba(255,255,255,0.4);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+    }
+    .results td { padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,0.07); color: rgba(255,255,255,0.8); }
+    .results tr:last-child td { border-bottom: none; }
+    .results tr.best td { font-weight: 500; color: #fff; background: rgba(255,255,255,0.06); }
+    .badge {
+      font-size: 10px; background: rgba(29,158,117,0.25); color: #5dcaa5;
+      border-radius: 4px; padding: 2px 6px; margin-left: 6px;
+    }
+
+    .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.5rem; }
+    .pill {
+      font-size: 12px; padding: 3px 10px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 99px; color: rgba(255,255,255,0.6);
+    }
+
+    .author {
+      display: flex; align-items: center; gap: 12px;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    .avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 500; flex-shrink: 0;
+    }
+    .author-name { font-size: 14px; font-weight: 500; color: #fff; }
+    .author-links { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 2px; }
+    .author-links a { color: rgba(255,255,255,0.65); text-decoration: none; }
+    .author-links a:hover { color: #fff; }
+    .note { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 6px; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hero">
+    <p class="hero-meta">Machine Learning · Geospatial Analysis · Taiwan</p>
+    <h1>Real Estate Price Prediction</h1>
+    <p>Sindian, New Taipei City · UCI dataset · 414 properties · 2012–2013</p>
+    <div class="tags">
+      <span class="tag">Regression</span>
+      <span class="tag">Ensemble</span>
+      <span class="tag">DBSCAN</span>
+      <span class="tag">Folium</span>
+      <span class="tag">Geospatial</span>
+    </div>
+  </div>
+
+  <div class="metrics">
+    <div class="metric">
+      <p class="metric-label">Best R²</p>
+      <p class="metric-value">0.712</p>
+      <p class="metric-sub">Voting Ensemble</p>
+    </div>
+    <div class="metric">
+      <p class="metric-label">MAE</p>
+      <p class="metric-value">5.32</p>
+      <p class="metric-sub">NTD/ping</p>
+    </div>
+    <div class="metric">
+      <p class="metric-label">MAPE</p>
+      <p class="metric-value">14.24%</p>
+      <p class="metric-sub">Voting Ensemble</p>
+    </div>
+    <div class="metric">
+      <p class="metric-label">Records</p>
+      <p class="metric-value">414</p>
+      <p class="metric-sub">No missing values</p>
+    </div>
+  </div>
+
+  <p class="section-title">Pipeline</p>
+  <div class="pipeline">
+    <span class="step">UCI load</span>
+    <span class="step">EDA</span>
+    <span class="step">Outlier detection</span>
+    <span class="step">VIF / multicollinearity</span>
+    <span class="step">Feature engineering</span>
+    <span class="step">k-fold CV</span>
+    <span class="step">VotingRegressor</span>
+    <span class="step">Residual map</span>
+  </div>
+
+  <p class="section-title">Results</p>
+  <div class="results">
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>R²</th>
+          <th>MAE</th>
+          <th>RMSE</th>
+          <th>MAPE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Linear Regression</td><td>0.6546</td><td>5.76</td><td>7.86</td><td>15.51%</td></tr>
+        <tr><td>Random Forest</td><td>0.6698</td><td>5.88</td><td>7.68</td><td>15.24%</td></tr>
+        <tr><td>Gradient Boosting</td><td>0.7083</td><td>5.51</td><td>7.22</td><td>14.15%</td></tr>
+        <tr><td>SVR</td><td>0.6587</td><td>5.67</td><td>7.81</td><td>15.55%</td></tr>
+        <tr class="best"><td>Ensemble (Voting)<span class="badge">best</span></td><td>0.7122</td><td>5.32</td><td>7.17</td><td>14.24%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="section-title">Files</p>
+  <div class="file-grid">
+    <a class="file-card" href="notebook.ipynb">
+      <p class="file-title">Notebook</p>
+      <p class="file-desc">Full pipeline with commentary</p>
+    </a>
+    <a class="file-card" href="https://canva.link/jdzyqvy05zdhny8" target="_blank">
+      <p class="file-title">Presentation</p>
+      <p class="file-desc">Project slides on Canva</p>
+    </a>
+    <a class="file-card" href="mapa_residuos_ensemble.html">
+      <p class="file-title">Residual map</p>
+      <p class="file-desc">Geospatial prediction errors</p>
+    </a>
+    <a class="file-card" href="mapa_clusters.html">
+      <p class="file-title">Cluster map</p>
+      <p class="file-desc">DBSCAN & KMeans spatial clustering</p>
+    </a>
+  </div>
+
+  <p class="section-title">Tech stack</p>
+  <div class="stack">
+    <span class="pill">Python 3.12</span>
+    <span class="pill">Scikit-learn</span>
+    <span class="pill">Pandas</span>
+    <span class="pill">NumPy</span>
+    <span class="pill">Folium</span>
+    <span class="pill">Statsmodels</span>
+    <span class="pill">SciPy</span>
+    <span class="pill">Matplotlib</span>
+    <span class="pill">Seaborn</span>
+    <span class="pill">Docker</span>
+    <span class="pill">Jupyter</span>
+  </div>
+
+  <div class="author">
+    <div class="avatar">RS</div>
+    <div>
+      <p class="author-name">Rafael Sanchez Clavijo</p>
+      <p class="author-links">
+        <a href="mailto:rasancla2001new@gmail.com">rasancla2001new@gmail.com</a> ·
+        <a href="https://github.com/BabylonFushi" target="_blank">GitHub</a>
+      </p>
+    </div>
+  </div>
+
+  <p class="note">Note: notebook and presentation are in Spanish.</p>
+
+</div>
+</body>
+</html>
