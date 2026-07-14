@@ -6,7 +6,7 @@ Full end-to-end Machine Learning pipeline to predict the price per unit area (NT
 
 ## Files
 
-- [Notebook](https://nbviewer.org/github/BabylonFushi/Sindian-Dataset/blob/main/.ipynb)
+- [Notebook](https://nbviewer.org/github/BabylonFushi/Sindian-Dataset/blob/main/notebooks/notebook.ipynb)
 - [Presentation](https://canva.link/jdzyqvy05zdhny8)
 
 ---
@@ -16,7 +16,6 @@ Full end-to-end Machine Learning pipeline to predict the price per unit area (NT
 The goal is to build a robust regression model that predicts housing prices from spatial and structural features, and to analyse prediction errors geographically to detect patterns the model may not have captured.
 
 The pipeline covers:
-
 - Data loading directly from UCI repository
 - Exploratory data analysis (EDA) and feature distribution
 - Outlier detection using Mahalanobis distance and Isolation Forest
@@ -49,17 +48,20 @@ Properties from the dataset are clustered geographically using DBSCAN and KMeans
 
 ![Mapa clusters](images/mapa_clusters.png)
 
+👉 [Open interactive map](web/mapa_clusters.html)
+
 ---
 
 ## Geospatial Residual Map
 
 Each point on the map represents a property from the test set. Color indicates the absolute prediction error:
-
 - **Green**: error <= 7 NTD/ping
 - **Orange**: error 8–13 NTD/ping
 - **Red**: error > 13 NTD/ping
 
 ![Mapa residuos](images/mapa_residuos.png)
+
+👉 [Open interactive map](web/mapa_residuos_ensemble.html)
 
 ---
 
@@ -86,19 +88,49 @@ Python 3.12 — Pandas, NumPy, Scikit-learn, SciPy, Statsmodels, Folium, Matplot
 
 ---
 
+## Repository Structure
+
+```
+Sindian-Dataset/
+├── README.md
+├── requirements.txt
+├── .gitignore
+│
+├── docker/
+│   ├── Dockerfile
+│   └── docker-compose.yml
+│
+├── notebooks/
+│   └── notebook.ipynb          # full pipeline with markdown commentary
+│
+├── data/
+│   └── anomalias_para_revision.xlsx   # generated on notebook run
+│
+├── images/
+│   ├── mapa_clusters.png
+│   ├── mapa_residuos.png
+│   └── outliers_scatter.png    # generated on notebook run
+│
+└── web/
+    ├── index.html
+    ├── mapa_clusters.html
+    └── mapa_residuos_ensemble.html
+```
+
 ## Files
 
 | File | Description |
 |---|---|
-| `notebook.ipynb` | Full pipeline with markdown commentary |
-| `mapa_residuos_ensemble.html` | Interactive geospatial residual map |
-| `mapa_clusters.html` | Interactive spatial clustering map |
+| `notebooks/notebook.ipynb` | Full pipeline with markdown commentary |
+| `web/mapa_residuos_ensemble.html` | Interactive geospatial residual map |
+| `web/mapa_clusters.html` | Interactive spatial clustering map |
 | `requirements.txt` | Python dependencies |
 
 > Note: the notebook and presentation are currently in Spanish.
+
 ---
 
 ## Author
 
-Rafael Sanchez Clavijo — [rasancla2001new@gmail.com](mailto:rasancla2001new@gmail.com)  
+Rafael Sanchez Clavijo — [rasancla2001new@gmail.com](mailto:rasancla2001new@gmail.com)
 [LinkedIn](https://www.linkedin.com/in/rafael-sanchez-clavijo-3a75a6365) · [GitHub](https://github.com/BabylonFushi)
