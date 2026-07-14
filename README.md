@@ -48,7 +48,7 @@ Properties from the dataset are clustered geographically using DBSCAN and KMeans
 
 ![Mapa clusters](images/mapa_clusters.png)
 
-👉 [Open interactive map](web/mapa_clusters.html)
+👉 [Open interactive map](docs/mapa_clusters.html) · [Live version](https://babylonfushi.github.io/Sindian-Dataset/mapa_clusters.html)
 
 ---
 
@@ -61,7 +61,7 @@ Each point on the map represents a property from the test set. Color indicates t
 
 ![Mapa residuos](images/mapa_residuos.png)
 
-👉 [Open interactive map](web/mapa_residuos_ensemble.html)
+👉 [Open interactive map](docs/mapa_residuos_ensemble.html) · [Live version](https://babylonfushi.github.io/Sindian-Dataset/mapa_residuos_ensemble.html)
 
 ---
 
@@ -111,8 +111,8 @@ Sindian-Dataset/
 │   ├── mapa_residuos.png
 │   └── outliers_scatter.png    # generated on notebook run
 │
-└── web/
-    ├── index.html
+└── docs/                        # published via GitHub Pages
+    ├── index.html               # landing page linking both maps
     ├── mapa_clusters.html
     └── mapa_residuos_ensemble.html
 ```
@@ -122,9 +122,15 @@ Sindian-Dataset/
 | File | Description |
 |---|---|
 | `notebooks/notebook.ipynb` | Full pipeline with markdown commentary |
-| `web/mapa_residuos_ensemble.html` | Interactive geospatial residual map |
-| `web/mapa_clusters.html` | Interactive spatial clustering map |
+| `docs/index.html` | Landing page (GitHub Pages entry point) |
+| `docs/mapa_residuos_ensemble.html` | Interactive geospatial residual map |
+| `docs/mapa_clusters.html` | Interactive spatial clustering map |
 | `requirements.txt` | Python dependencies |
+
+## Live Maps
+
+Both interactive maps are published via GitHub Pages:
+🔗 **[babylonfushi.github.io/Sindian-Dataset](https://babylonfushi.github.io/Sindian-Dataset/)**
 
 > Note: the notebook and presentation are currently in Spanish.
 
