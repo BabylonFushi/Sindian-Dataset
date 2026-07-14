@@ -1,4 +1,4 @@
-## 🇬🇧 English
+## ![GB](https://flagcdn.com/24x18/gb.png) English
 
 # Real Estate Price Prediction — Sindian, Taiwan
 
@@ -147,7 +147,7 @@ Rafael Sanchez Clavijo — <rasancla2001new@gmail.com> [LinkedIn](https://www.li
 ---
 ---
 
-## 🇪🇸 Español
+## ![ES](https://flagcdn.com/24x18/es.png) Español
 
 # Predicción de Precios Inmobiliarios — Sindian, Taiwán
 
