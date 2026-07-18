@@ -144,6 +144,8 @@ Ambos mapas interactivos están publicados vía GitHub Pages:
 
 Rafael Sanchez Clavijo — <rasancla2001new@gmail.com> [LinkedIn](https://www.linkedin.com/in/rafael-sanchez-clavijo-3a75a6365) · [GitHub](https://github.com/BabylonFushi)
 
+---
+
 ## ![GB](https://flagcdn.com/24x18/gb.png) English
 
 # Real Estate Price Prediction — Sindian, Taiwan
